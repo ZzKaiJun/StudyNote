@@ -1,13 +1,13 @@
 # git 為版控工具
 
-git add .
-git commit
-git push -u origin master
+git add .			加入所有檔案到索引
+git commit			將索引的檔案放到本地數據庫
+git push -u origin master	本地數據庫上傳到遠端數據庫
 
-git clean -n    列出即將刪除的所有未追蹤的檔案
-git clean -f    刪除所有未追蹤的檔案
+git clean -n    		列出即將刪除的所有未追蹤的檔案
+git clean -f    		刪除所有未追蹤的檔案
 
-git branch	     查看現有分支
-git branch dev       新建分支 dev
+git branch	     		查看現有分支
+git branch dev       		新建分支 dev
 
-git checkout 代號/分支  切換到指定commit / 特定分支的最新commit
+git checkout 代號/分支  	切換到指定commit / 特定分支的最新commit
