@@ -1,13 +1,71 @@
 # git 為版控工具
 
+# 基本指令
+git log				查看此分支上的commit
 git add .			加入所有檔案到索引
 git commit			將索引的檔案放到本地數據庫
 git push -u origin master	本地數據庫上傳到遠端數據庫
 
+# 刪除未追蹤檔案
 git clean -n    		列出即將刪除的所有未追蹤的檔案
 git clean -f    		刪除所有未追蹤的檔案
 
+# 分支
 git branch	     		查看現有分支
 git branch dev       		新建分支 dev
+git branch -d dev               強制刪除分支dev
+git branch -f main HEAD~3	強制移動分支，讓分支指向另一個commit
 
-git checkout 代號/分支  	切換到指定commit / 特定分支的最新commit
+
+
+
+# 取消修改
+git reset HEAD^^ 		將取消前2次提交，但保留您的更改。   往回移動 branch，原來的 branch 所指向的 commit 好像從來沒有存在過一樣。  對別人的remote沒用
+git reset --hard HEAD^^		將取消前2次提交，且取消您的更改。
+
+git revert HEAD			可用來取消remote branch 的commit		
+
+
+# 移動至提交/分支
+git checkout 代號/分支  	切換到指定commit / 切換分支
+git checkout dev^		向上移動1個commit
+git checkout HEAD^		由HEAD 向上移動1個commit
+git checkout HEAD~4		向上移動4個commit
+
+
+# 合併、快轉
+git merge dev			與分支dev分支合併 (快進式)
+git merge dev --no-ff		與分支dev合併，非快進合併 (--no-ff) 會將被合併的分支的所有提交都保留在合併提交中，而不會將它們壓縮成一個提交
+
+git rebase dev			將目前的分支移動到dev分支的最新commit後		
+
+
+# 目前位置
+HEAD 				通常指向一個 branch 的名稱，可使用git checkout hash名稱  來指向到一個commit
+
+
+# 移動commit
+git cherry-pick	<Commit1> 	複製幾個 commit 並且接在你目前的位置（HEAD）下面  (原先的commit會保留，在目前位置複製出新的commit)
+
+git rebase -i HEAD~4		-i 會打開一個 UI，讓你知道說有哪些 commit 會被複製下來，可以對他們進行排序後再複製
+
+
+# 修改commit
+git commit --amend
+
+
+# 錨點 (永久指向特定commit)
+git tag v1 c1			命名這個 tag 叫做 v1，並且讓它指向 commit C1   ，你不可以 "checkout" 到 tag 上面 commit，tag 的存在就像是在 commit tree 上的錨。
+git describe			顯示離你最近的錨點（也就是 tag）
+
+
+# 找bug
+git bisect start <壞的 Commit> <好的 Commit> 	  找出第一次出錯的 Commit 來找到問題原因。 
+
+
+# 學習網站
+https://learngitbranching.js.org/?locale=zh_TW&demo=
+
+
+
+
