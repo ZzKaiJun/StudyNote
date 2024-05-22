@@ -14,9 +14,8 @@ git clean -f    		刪除所有未追蹤的檔案
 git branch	     		查看現有分支
 git branch dev       		新建分支 dev
 git branch -d dev               強制刪除分支dev
-git branch -f main HEAD~3	強制移動分支，讓分支指向另一個commit
-
-
+git branch -f main HEAD~3	強制移動分支，讓分支指向另一個commit    ex: git branch -f main c2
+git branch -u o/main foo	checkout 一個新的 foo branch，而且該 branch 會被用來 track remote 上的 main branch。
 
 
 # 取消修改
@@ -30,7 +29,10 @@ git revert HEAD			可用來取消remote branch 的commit
 git checkout 代號/分支  	切換到指定commit / 切換分支
 git checkout dev^		向上移動1個commit
 git checkout HEAD^		由HEAD 向上移動1個commit
-git checkout HEAD~4		向上移動4個commit
+git checkout HEAD~4		向上移動4個commitd
+git checkout main^2		^ 後面所跟的數字表示我要選擇哪一個 parent commit， 因為可能經過有將多個commit merge
+git checkout HEAD~^2~2		符號可以連在一起使用
+git checkout -b foo o/main      checkout 一個新的 foo branch，而且該 branch 會被用來 track remote 上的 main branch。
 
 
 # 合併、快轉
@@ -56,16 +58,44 @@ git commit --amend
 
 # 錨點 (永久指向特定commit)
 git tag v1 c1			命名這個 tag 叫做 v1，並且讓它指向 commit C1   ，你不可以 "checkout" 到 tag 上面 commit，tag 的存在就像是在 commit tree 上的錨。
-git describe			顯示離你最近的錨點（也就是 tag）
+git describe <ref>		顯示離你最近的錨點（也就是 tag）
+
+ref 代表任何一個可以被 git 解讀成 commit 的位置， 
+指令的輸出就像這樣：<tag>_<numCommits>_g<hash> 
+<tag> 表示的是離 <ref> 最近的 tag， numCommits 是表示這個 tag 離 <ref> 有多少個 commit， <hash> 表示的是你所給定的 <ref> 所表示的 commit 的前七個 id。
+
 
 
 # 找bug
 git bisect start <壞的 Commit> <好的 Commit> 	  找出第一次出錯的 Commit 來找到問題原因。 
 
 
+
+---------------------------------------------
+
+# 遠端數據庫
+
+
+git remote			查看所有的遠端數據庫
+git remote origin master	建立遠端數據庫origin (名稱)，master是分支
+
+git fetch			下載 remote 有的 commit，但是在我們的 local repository 是沒有該 commit。還有更新我們 remote branch 所指向的地方（例如， o/main），
+				git fetch 並不會影響到在你的 local repository 中的 main branch
+
+git pull			其實就是 git fetch; git merge 循序執行的結果。而且 merge 的 branch 就是 fetch 所更新的 branch。
+git pull --rebase		一個 fetch 以及一個 rebase。
+
+
+git push			上傳 你的 commit 到特定 remote 上面並且做出相對應的更新
+git push origin foo		將foo分支上傳到origin remote
+git push origin foo^:main	<source>:<destination>  將foo^ 的 資料上傳到 origin remote 且分支名稱為 main
+
+
 # 學習網站
 https://learngitbranching.js.org/?locale=zh_TW&demo=
 
-
-
+undo		上一步
+reset		重新作答
+show solution   查看解答
+levels		查看關卡
 
