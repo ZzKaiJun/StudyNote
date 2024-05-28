@@ -1,0 +1,12 @@
+Flask 網站框架
+
+輕量級、可擴展的網頁框架
+
+
+# 安裝flask
+
+terminal : pip install Flask
+
+
+
+
