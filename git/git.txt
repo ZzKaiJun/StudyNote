@@ -91,6 +91,20 @@ git push origin foo		將foo分支上傳到origin remote
 git push origin foo^:main	<source>:<destination>  將foo^ 的 資料上傳到 origin remote 且分支名稱為 main
 
 
+------------------------------------------------
+
+
+Q: 當你上傳一個最新commit到遠端數據庫dev分支，但突然反悔想要取消commit，可以使用
+
+git checkout dev  切換到本地dev分支
+
+git reset --hard HEAD^
+
+git push origin dev --force  
+
+
+
+
 # 學習網站
 https://learngitbranching.js.org/?locale=zh_TW&demo=
 
